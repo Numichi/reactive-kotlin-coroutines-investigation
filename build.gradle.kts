@@ -17,7 +17,7 @@ repositories {
 
 configurations {
     all {
-        exclude("org.springframework.boot", "spring-boot-starter-logging")
+        exclude("org.springframework.boot", "spring-boot-starter-logging") // <-- Deactive default logger
     }
 }
 
@@ -30,20 +30,16 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2") // <-- Add Log4J2
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 
-    implementation("org.springframework.boot", "spring-boot-starter-log4j2")
-    annotationProcessor("org.apache.logging.log4j", "log4j-core")
-    implementation("com.lmax", "disruptor", "3.4.4")
-
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j") // <-- It contains MDCContext()
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict", "-opt-in=kotlin.RequiresOptIn")
+        freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
     }
 }
