@@ -24,6 +24,9 @@ configurations {
 extra["log4j2.version"] = "2.17.1"
 
 dependencies {
+    implementation("com.lmax:disruptor:3.4.4") // For AsyncLogger (see: log4j2.xml)
+    annotationProcessor("org.apache.logging.log4j:log4j-core:2.17.1") // For Log4j2 @Plugin
+
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")

@@ -8,6 +8,7 @@ import java.util.stream.Collectors
 
 class MdcContextLifter<T>(var coreSubscriber: CoreSubscriber<T>) : CoreSubscriber<T> {
     override fun onSubscribe(subscription: Subscription) {
+        copyToMdc(coreSubscriber.currentContext())
         coreSubscriber.onSubscribe(subscription)
     }
 
@@ -17,10 +18,12 @@ class MdcContextLifter<T>(var coreSubscriber: CoreSubscriber<T>) : CoreSubscribe
     }
 
     override fun onError(t: Throwable) {
+        copyToMdc(coreSubscriber.currentContext())
         coreSubscriber.onError(t)
     }
 
     override fun onComplete() {
+        copyToMdc(coreSubscriber.currentContext())
         coreSubscriber.onComplete()
     }
 
