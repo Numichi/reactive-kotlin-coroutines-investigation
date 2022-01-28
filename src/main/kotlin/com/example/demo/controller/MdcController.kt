@@ -39,6 +39,7 @@ class MdcController {
 //            logger.info("async - ${Thread.currentThread().name}")
 //        }
 
+        // A NodeJS from Java base investigate
         WebClient.builder().filter(WebExchangeFilter()).build()
             .get().uri("http://localhost:3000/?delay=$delay")
             .retrieve()
